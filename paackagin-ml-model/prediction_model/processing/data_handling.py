@@ -1,7 +1,7 @@
 import os
 import joblib
 import pandas as pd
-import prediction_model.config import config
+from prediction_model.config import config
 
 
 def load_data(file_name):
