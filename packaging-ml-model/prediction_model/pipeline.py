@@ -4,7 +4,7 @@ import prediction_model.processing.preprocessing as pp
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LogisticRegression
 
-classificationS_pipeline = Pipeline(
+classifications_pipeline = Pipeline(
     [
         ('MeanImputation', pp.MeanImputer(variables=config.NUMERICAL_FEATURES)),
         ('ModeImputation', pp.MeanImputer(variables=config.CATEGORICAL_FEATURES)),

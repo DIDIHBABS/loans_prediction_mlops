@@ -19,4 +19,3 @@ def load_pipeline(pipe_line_to_load):
     model_loaded = joblib.load(save_path)
     print('Model has been loaded')
     return model_loaded
-

@@ -67,7 +67,8 @@ class FeatureTransform(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         X = X.copy()
-        X[self.variables_to_modify] = X[self.variables_to_modify] + X[self.variables_to_add]
+        for feature in  self.variables_to_modify:
+                X[feature] = X[feature] + X[self.variables_to_add]
         return X
 
 class LabelEncoder(BaseEstimator, TransformerMixin):
