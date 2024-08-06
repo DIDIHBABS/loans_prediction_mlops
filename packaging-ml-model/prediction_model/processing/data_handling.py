@@ -1,21 +1,36 @@
 import os
-import joblib
 import pandas as pd
+import joblib
+
+from pathlib import Path
+import os
+import sys
+
+# # Adding the below path to avoid module not found error
+PACKAGE_ROOT = Path(os.path.abspath(os.path.dirname(__file__))).parent
+sys.path.append(str(PACKAGE_ROOT))
+
 from prediction_model.config import config
 
 
+#Load the dataset
 def load_data(file_name):
-    file_path = os.path.join(config.DATASET,file_name)
+    filepath = os.path.join(config.DATASET, file_name)
+    _data = pd.read_csv(f'{filepath}')
+    return _data
 
 
-def save_pipeline(pipe_line_to_save):
-    save_path = os.path.join(config.MODEL_NAME)
-    joblib.dump(pipe_line_to_save, save_path)
-    print(f"Model had been stored to{config.MODEL_NAME}")
+#Serialization
+def save_pipeline(pipeline_to_save):
+    save_path = os.path.join(config.SAVED_MODEL_PATH, config.MODEL_NAME)
+    joblib.dump(pipeline_to_save, save_path)
+    print(f"Model has been saved under the name {config.MODEL_NAME}")
 
 
-def load_pipeline(pipe_line_to_load):
-    save_path = os.path.join(config.MODEL_NAME)
+# Deserialization
+def load_pipeline(pipeline_to_load):
+    save_path = os.path.join(config.SAVED_MODEL_PATH, config.MODEL_NAME)
     model_loaded = joblib.load(save_path)
-    print('Model has been loaded')
+    print(f"Model has been loaded")
     return model_loaded
+
